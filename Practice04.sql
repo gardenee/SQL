@@ -44,9 +44,7 @@ SELECT employee_id 사번
        ,first_name 이름
        ,salary 급여
 FROM employees
-WHERE salary < ANY (SELECT salary
-                    FROM employees
-                    WHERE job_id = 'ST_MAN')
+WHERE salary < ANY (SELECT salary FROM employees WHERE job_id = 'ST_MAN')
 ORDER BY salary DESC;
 
 
@@ -71,8 +69,7 @@ SELECT e.employee_id 직원번호
        ,e.first_name 이름
        ,e.salary 급여
        ,e.department_id 부서번호
-FROM employees e, (SELECT department_id
-                          ,MAX(salary) salary
+FROM employees e, (SELECT department_id, MAX(salary) salary
                    FROM employees
                    GROUP BY department_id) s
 WHERE e.department_id = s.department_id
@@ -85,8 +82,7 @@ ORDER BY e.salary DESC;
 -- 연봉 총합이 가장 높은 업무부터 업무명과 연봉 총합을 조회하시오
 SELECT j.job_title 업무명
        ,s.salary 연봉총합
-FROM jobs j, (SELECT job_id
-              ,SUM(salary) salary
+FROM jobs j, (SELECT job_id, SUM(salary) salary
               FROM employees
               GROUP BY job_id) s
 WHERE j.job_id = s.job_id
@@ -98,8 +94,7 @@ ORDER BY s.salary DESC;
 SELECT e.employee_id 직원번호
        ,e.first_name 이름
        ,e.salary 급여
-FROM employees e, (SELECT department_id,
-                   AVG(salary) salary
+FROM employees e, (SELECT department_id, AVG(salary) salary
                    FROM employees
                    GROUP BY department_id) avg
 WHERE e.department_id = avg.department_id

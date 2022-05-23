@@ -61,8 +61,7 @@ ORDER BY l.location_id ASC;
 -- 문제4
 -- 지역에 속한 나라들을 지역이름, 나라이름으로 출력하되 지역이름 오름차순, 나라이름 내림차순
 -- 으로 정렬하세요
-SELECT r.region_name 지역이름
-       ,c.country_name 나라이름
+SELECT r.region_name 지역이름, c.country_name 나라이름
 FROM regions r, countries c
 WHERE r.region_id = c.region_id
 ORDER BY r.region_name ASC, c.country_name DESC;

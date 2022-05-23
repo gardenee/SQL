@@ -7,8 +7,7 @@ FROM employees
 ORDER BY hire_date ASC;
 
 --문제2
-SELECT job_title 업무이름
-       ,max_salary 최고월급
+SELECT job_title 업무이름, max_salary 최고월급
 FROM jobs
 ORDER BY max_salary DESC;
 
